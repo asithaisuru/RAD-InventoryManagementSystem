@@ -16,9 +16,9 @@ import java.util.logging.Logger;
 public class DBConnector {
 
     private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String url = "jdbc:mysql://localhost:3306/";
+    private static final String url = "jdbc:mysql://localhost:3306/inventorymanagementsystem";
     private static final String username = "root";
-    private static final String password = "password";
+    private static final String password = "";
 
     public static Connection getConnection() {
         Connection con = null;
