@@ -41,41 +41,61 @@ public final class addProduct_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("<!DOCTYPE html>\n");
-      out.write("<html>\n");
-      out.write("    <head>\n");
-      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>Add Product</title>\n");
-      out.write("    </head>\n");
-      out.write("    <body>\n");
-      out.write("        <div>\n");
-      out.write("            <form action=\"addProduct-Process.jsp\" method=\"POST\">\n");
-      out.write("                <table>\n");
-      out.write("                    <tr>\n");
-      out.write("                        <td><label for=\"name\">Name : </label></td>\n");
-      out.write("                        <td><input type=\"text\" name=\"name\" id=\"name\"></td>\n");
-      out.write("                    </tr>\n");
-      out.write("                    <tr>\n");
-      out.write("                        <td><label for=\"price\">Price : </label></td>\n");
-      out.write("                        <td><input type=\"text\" name=\"price\" id=\"price\"></td>\n");
-      out.write("                    </tr>\n");
-      out.write("                    <tr>\n");
-      out.write("                        <td><label for=\"quantity\">Quantity : </label></td>\n");
-      out.write("                        <td><input type=\"text\" name=\"quantity\" id=\"quantity\"></td>\n");
-      out.write("                    </tr>\n");
-      out.write("                    <tr>\n");
-      out.write("                        <td></td>\n");
-      out.write("                        <td><input type=\"submit\" value=\"Submit\"></td>\n");
-      out.write("                    </tr>\n");
-      out.write("\n");
-      out.write("                </table>\n");
-      out.write("            </form>\n");
-      out.write("        </div>\n");
-      out.write("    </body>\n");
-      out.write("</html>\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("<!DOCTYPE html>\r\n");
+      out.write("<html>\r\n");
+      out.write("    <head>\r\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
+      out.write("        <title>Add Product</title>\r\n");
+      out.write("    </head>\r\n");
+      out.write("    <body>\r\n");
+      out.write("        <div>\r\n");
+      out.write("            <h1>Add Product</h1>\r\n");
+      out.write("        </div>\r\n");
+      out.write("        <div>\r\n");
+      out.write("            <form action=\"addProduct-Process.jsp\" method=\"POST\">\r\n");
+      out.write("                <table>\r\n");
+      out.write("                    <tr>\r\n");
+      out.write("                        <td><label for=\"name\">Name : </label></td>\r\n");
+      out.write("                        <td><input type=\"text\" name=\"name\" id=\"name\"></td>\r\n");
+      out.write("                    </tr>\r\n");
+      out.write("                    <tr>\r\n");
+      out.write("                        <td><label for=\"price\">Price : </label></td>\r\n");
+      out.write("                        <td><input type=\"text\" name=\"price\" id=\"price\"></td>\r\n");
+      out.write("                    </tr>\r\n");
+      out.write("                    <tr>\r\n");
+      out.write("                        <td><label for=\"quantity\">Quantity : </label></td>\r\n");
+      out.write("                        <td><input type=\"text\" name=\"quantity\" id=\"quantity\"></td>\r\n");
+      out.write("                    </tr>\r\n");
+      out.write("                    <tr>\r\n");
+      out.write("                        <td></td>\r\n");
+      out.write("                        <td><input type=\"submit\" value=\"Submit\"></td>\r\n");
+      out.write("                    </tr>\r\n");
+      out.write("\r\n");
+      out.write("                </table>\r\n");
+      out.write("            </form>\r\n");
+      out.write("        </div>\r\n");
+      out.write("        \r\n");
+      out.write("        <div>\r\n");
+      out.write("            ");
+
+            if(request.getParameter("add") != null){
+                if(request.getParameter("add").equals("1")){
+                    out.println("Product Added to Inventory.");
+                }else if (request.getParameter("add").equals("0")){
+                    out.println("ERROR : Unable to save to database.");
+                }else if (request.getParameter("add").equals("2")){
+                    String id = request.getParameter("id");
+                    out.println("ERROR : Product name exists in the product id : "+id);
+                }
+            }
+            
+      out.write("\r\n");
+      out.write("        </div>\r\n");
+      out.write("    </body>\r\n");
+      out.write("</html>\r\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
