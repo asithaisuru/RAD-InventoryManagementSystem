@@ -55,6 +55,11 @@ public final class cashierSystem_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>Cashier System</title>\n");
+      out.write("        <!-- Latest compiled and minified CSS -->\n");
+      out.write("        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\n");
+      out.write("\n");
+      out.write("        <!-- Latest compiled JavaScript -->\n");
+      out.write("        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
       out.write("        <h1>Cashier System</h1>\n");
@@ -76,6 +81,7 @@ public final class cashierSystem_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                        <th>Name</th>\n");
       out.write("                        <th>Quantity</th>\n");
       out.write("                        <th>Price</th>\n");
+      out.write("                        <th>Total Price</th>\n");
       out.write("                    </tr>\n");
       out.write("                </thead>\n");
       out.write("                <tbody>\n");
@@ -85,6 +91,7 @@ public final class cashierSystem_jsp extends org.apache.jasper.runtime.HttpJspBa
                         if (productList == null) {
                             productList = new ArrayList<Product>();
                         }
+                        double subTotal = 0;
                         for (Product product : productList) {
                     
       out.write("\n");
@@ -101,15 +108,29 @@ out.println(product.getQuantity());
       out.write("                        <td>");
 out.println(product.getPrice());
       out.write("</td>\n");
+      out.write("                        <td>");
+out.println(product.getPrice() * product.getQuantity());
+      out.write("</td>\n");
       out.write("                    </tr>\n");
       out.write("                    ");
 
+                            subTotal += product.getPrice() * product.getQuantity();
                         }
                     
       out.write("\n");
+      out.write("                    <tr>\n");
+      out.write("                        <td colspan=\"4\">Sub Total</td>\n");
+      out.write("                        <td>");
+out.println(subTotal);
+      out.write("</td>\n");
+      out.write("                    </tr>\n");
       out.write("                </tbody>\n");
       out.write("            </table>\n");
       out.write("        </div>\n");
+      out.write("\n");
+      out.write("        <form action=\"saveBill.jsp\" method=\"POST\">\n");
+      out.write("            <input type=\"submit\" value=\"Print\">\n");
+      out.write("        </form>\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
