@@ -98,6 +98,13 @@ public class Bill {
                     psInsertBillItem.setInt(3, product.getQuantity());
                     psInsertBillItem.setDouble(4, product.getPrice());
                     psInsertBillItem.addBatch();
+
+                    String updateQuantitySQL = "UPDATE product SET quantity = quantity - ? WHERE id = ?";
+                    PreparedStatement psUpdateQuantity = con.prepareStatement(updateQuantitySQL);
+                    psUpdateQuantity.setInt(1, product.getQuantity());
+                    psUpdateQuantity.setInt(2, product.getId());
+                    psUpdateQuantity.executeUpdate();
+                    psUpdateQuantity.close();
                 }
 
                 psInsertBillItem.executeBatch();
@@ -113,35 +120,6 @@ public class Bill {
                 }
             }
             e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (psInsertBill != null) {
-                try {
-                    psInsertBill.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (psInsertBillItem != null) {
-                try {
-                    psInsertBillItem.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return billId;
     }
@@ -184,21 +162,21 @@ public class Bill {
 
         return rs;
     }
-    
-    public String getProductName(Connection con, String id){
+
+    public String getProductName(Connection con, String id) {
         String productName = null;
         String sql = "SELECT name FROM product WHERE id = ?";
         try {
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, String.valueOf(id));
             ResultSet rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 productName = rs.getString("name");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Bill.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return productName;
     }
 }

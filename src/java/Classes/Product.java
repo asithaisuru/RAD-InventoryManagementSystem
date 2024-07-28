@@ -141,5 +141,14 @@ public class Product {
         }
         return id;
     }
+    
+    public void updateQuantity(Connection con, int quantity) throws SQLException {
+        String sql = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, quantity);
+        ps.setInt(2, this.id);
+        ps.executeUpdate();
+        ps.close();
+    }
 
 }
