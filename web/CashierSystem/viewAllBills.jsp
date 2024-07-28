@@ -20,6 +20,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     </head>
     <body class="bg-dark text-white text-center mt-5">
+        <div class="d-flex justify-content-start ms-5">
+            <a href="./cashierSystem.jsp" class="btn btn-secondary"><i class="fas fa-chevron-left"></i></a>
+        </div>
         <div class="container">
             <h1>All Bills</h1>
             <div class="text-center">
@@ -51,12 +54,12 @@
                             <td><%= bill.getTotalAmount()%></td>
                             <td>
                                 <div class="col-1">
-                                <form action="viewABill.jsp" method="POST" style="display:inline;">
-                                    <input type="hidden" name="id" value="<%=bill.getId()%>"/>
-                                    <input type="hidden" name="date" value="<%=bill.getBillDate()%>"/>
-                                    <button type="submit" class="btn btn-secondary"><i class="fas fa-ellipsis-v"></i></button>
-                                </form>
-                            </div>
+                                    <form action="viewABill.jsp" method="POST" style="display:inline;">
+                                        <input type="hidden" name="id" value="<%=bill.getId()%>"/>
+                                        <input type="hidden" name="date" value="<%=bill.getBillDate()%>"/>
+                                        <button type="submit" class="btn btn-secondary"><i class="fas fa-ellipsis-v"></i></button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         <%

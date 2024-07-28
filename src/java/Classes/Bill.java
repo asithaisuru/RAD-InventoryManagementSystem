@@ -131,7 +131,7 @@ public class Bill {
         ResultSet rs = null;
 
         try {
-            String query = "SELECT * FROM bills";
+            String query = "SELECT * FROM bills ORDER BY bill_date DESC;";
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
 

@@ -23,18 +23,18 @@
             String name = null;
             String quantity = null;
             String price = null;
-        if(request.getParameter("name")!= null){
-            name = request.getParameter("name");
-            quantity = request.getParameter("quantity");
-            price = request.getParameter("price");
-        }
+            if (request.getParameter("name") != null) {
+                name = request.getParameter("name");
+                quantity = request.getParameter("quantity");
+                price = request.getParameter("price");
+            }
         %>
         <div class="mb-5">
             <h1>Add Product</h1>
         </div>
         <div class="row">
             <div class="col-4">
-                <form action="addProduct-Process.jsp" method="POST">
+                <form action="editProduct-Process.jsp" method="POST">
                     <table>
                         <tr>
                             <td><label for="name">Name : </label></td>
@@ -62,6 +62,13 @@
                                         } else if (request.getParameter("add").equals("2")) {
                                             String id = request.getParameter("id");
                                             out.println("ERROR : Product name exists in the product id : " + id);
+                                        }
+                                    }
+                                    if (request.getParameter("delete") != null) {
+                                        if (request.getParameter("delete").equals("1")) {
+                                            out.println("Product Removed.");
+                                        } else {
+                                            out.println("ERROR : Unable to Remove Product.");
                                         }
                                     }
                                 %>
@@ -101,8 +108,8 @@
                                     <input type="hidden" name="id" value="<%=p.getId()%>"/>
                                     <button type="submit" class="btn btn-primary"><i class="far fa-edit"></i></button>
                                 </form>
-                                <form action="#.jsp" method="POST" style="display:inline;">
-                                    <input type="hidden" name="id" value=""/>
+                                <form action="deleteProduct.jsp" method="POST" style="display:inline;">
+                                    <input type="hidden" name="id" value="<%=p.getId()%>"/>
                                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>

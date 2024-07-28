@@ -4,6 +4,9 @@
     Author     : Asitha
 --%>
 
+<%@page import="java.sql.Connection"%>
+<%@page import="Classes.DBConnector"%>
+<%@page import="Classes.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,9 +21,55 @@
         <div class="container mt-5">
             <h1 class="h1">Edit Product</h1>
             <%
-                String id = request.getParameter("id");
-
+                Connection con = DBConnector.getConnection();
+                String id = "-1";
+                if (request.getParameter("id") != null) {
+                    id = request.getParameter("id");
+                }
+                Product product = new Product();
+                product.setId(Integer.parseInt(id));
+                product.getAProduct(con);
             %>
+
+            <%
+                if (request.getParameter("edit") != null) {
+                    String edit = request.getParameter("edit");
+                    if (edit.equals("1")) {
+                        out.println("Product Edited Successfully.");
+                    } else {
+                        out.println("Product Edit Failed.");
+                    }
+                }
+            %>
+            <%
+                if (id != "-1") {%>
+            <div 
+                class="">
+                <form action = "editProduct-Process.jsp" method = "POST"> 
+                    <table>
+                        <tr> 
+                            <td><label for = "name" > Name: </label ></td> 
+                            <td><input type = "text" name = "name" id = "name" value ="<%=product.getName()%>"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="price">Price : </label></td>
+                            <td><input type="text" name="price" id="price" value="<%=product.getPrice()%>"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="quantity">Quantity : </label></td>
+                            <td><input type="text" name="quantity" id="quantity" value="<%=product.getQuantity()%>"></td>
+                        </tr>
+                        <tr>
+                        <input type="hidden" name="id" value="<%=id%>">
+                        <td colspan="2"><button type="submit" class="btn btn-success mt-3">Update</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <%} else {%>
+            <br>
+            <a href="./addProduct.jsp"><span class="btn btn-secondary mt-5">Go Back</span></a>
+            <%}%>
         </div>
     </body>
 </html>

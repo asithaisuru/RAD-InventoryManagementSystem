@@ -141,14 +141,48 @@ public class Product {
         }
         return id;
     }
-    
+
     public void updateQuantity(Connection con, int quantity) throws SQLException {
-        String sql = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
+        String sql = "UPDATE product SET quantity = quantity - ? WHERE id = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, quantity);
         ps.setInt(2, this.id);
         ps.executeUpdate();
         ps.close();
+    }
+
+    public boolean editProduct(Connection con) {
+        boolean a = false;
+        String sql = "UPDATE product SET name = ?, price = ?, quantity = ? WHERE id = ?";
+        PreparedStatement pstmt;
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, this.name);
+            pstmt.setDouble(2, this.price);
+            pstmt.setInt(3, this.quantity);
+            pstmt.setInt(4, this.id);
+            if (pstmt.executeUpdate() > 0) {
+                a = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return a;
+    }
+
+    public boolean deleteProduct(Connection con) {
+        boolean a = false;
+        String sql = "DELETE FROM product WHERE id = ?";
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, this.id);
+            if (pstmt.executeUpdate() > 0) {
+                a = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return a;
     }
 
 }

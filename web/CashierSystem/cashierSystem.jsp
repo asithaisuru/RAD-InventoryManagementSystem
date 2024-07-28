@@ -32,6 +32,22 @@
                 </div>
             </form>
 
+            <div class="row mb-3">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-2">
+                    <form action="saveBill.jsp" method="POST">
+                        <input type="submit" value="Print" class="btn btn-warning col-lg-12">
+                    </form>
+                </div>
+                <div class="col-lg-2">
+                    <a href="clearBill.jsp"><span class="btn btn-danger col-lg-12">Clear Bill</span></a>
+                </div>
+                <div class="col-lg-2">
+                    <a href="viewAllBills.jsp"><span class="btn btn-secondary col-lg-12">View All Bills</span></a>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+
             <div class="text-center">
                 <table class="table table-dark table-hover">
                     <thead>
@@ -76,19 +92,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-2">
-                    <form action="saveBill.jsp" method="POST">
-                        <input type="submit" value="Print" class="btn btn-warning col-lg-12">
-                    </form>
-                </div>
-                <div class="col-lg-2">
-                    <a href="clearBill.jsp"><span class="btn btn-danger col-lg-12">Clear Bill</span></a>
-                </div>
-                <div class="col-lg-4"></div>
             </div>
         </div>
     </body>
