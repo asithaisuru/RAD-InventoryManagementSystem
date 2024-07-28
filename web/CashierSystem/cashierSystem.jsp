@@ -61,7 +61,7 @@
                             <td><%out.println(product.getPrice() * product.getQuantity());%></td>
                             <td>
                                 <form action="removeProduct.jsp" method="POST" style="display:inline;">
-                                    <input type="hidden" name="id" value="<%= product.getId() %>"/>
+                                    <input type="hidden" name="id" value="<%= product.getId()%>"/>
                                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>
@@ -78,9 +78,18 @@
                 </table>
             </div>
 
-            <form action="saveBill.jsp" method="POST">
-                <input type="submit" value="Print" class="btn btn-warning col-lg-1">
-            </form>
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2">
+                    <form action="saveBill.jsp" method="POST">
+                        <input type="submit" value="Print" class="btn btn-warning col-lg-12">
+                    </form>
+                </div>
+                <div class="col-lg-2">
+                    <a href="clearBill.jsp"><span class="btn btn-danger col-lg-12">Clear Bill</span></a>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
         </div>
     </body>
 </html>
