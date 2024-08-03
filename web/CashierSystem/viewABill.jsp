@@ -26,9 +26,7 @@
             User user = new User();
             user.setId(userId);
             user.getAUser(con);
-            if (!user.getRole().equals("Admin")) {
-                response.sendRedirect("../index.jsp");
-            } else {
+            if (user.getRole().equals("Admin")) {
         %>
         <%@include file="../Admin/adminNav.jsp" %>
         <%

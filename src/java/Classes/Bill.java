@@ -24,18 +24,15 @@ public class Bill {
     private double totalAmount;
     private String billDate;
 
-    // Constructor
     public Bill(int id, double totalAmount, String billDate) {
         this.id = id;
         this.totalAmount = totalAmount;
         this.billDate = billDate;
     }
 
-    // Default constructor
     public Bill() {
     }
 
-    // Getter and Setter methods
     public int getId() {
         return id;
     }

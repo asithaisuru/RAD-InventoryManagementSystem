@@ -24,15 +24,13 @@
             User user = new User();
             user.setId(userId);
             user.getAUser(con);
-            if (!user.getRole().equals("Admin")) {
-                response.sendRedirect("../index.jsp");
-            } else {
+            if (user.getRole().equals("Admin")) {
         %>
         <%@include file="../Admin/adminNav.jsp" %>
         <%
             }
         %>
-        <a href="./cashierSystem.jsp"><button class="btn btn-secondary ms-5"><i class="fas fa-chevron-left"></i></button></a>
+        <a href="./cashierSystem.jsp"><button class="btn btn-secondary ms-5 mt-5"><i class="fas fa-chevron-left"></i></button></a>
         <div class="container text-center ">
             <h1>View All Products</h1>
             <table class="table table-dark table-hover">
