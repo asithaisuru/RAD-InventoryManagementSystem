@@ -4,6 +4,7 @@
     Author     : Asitha
 --%>
 
+<%@page import="Classes.User"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="Classes.DBConnector"%>
@@ -18,13 +19,28 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     </head>
-    <body class="text-center text-white bg-dark mt-5">
-        <div class="d-flex justify-content-start ms-5">
+    <body class="text-center text-white bg-dark">
+        <%
+            Connection con = DBConnector.getConnection();
+            int userId = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
+            User user = new User();
+            user.setId(userId);
+            user.getAUser(con);
+            if (!user.getRole().equals("Admin")) {
+                response.sendRedirect("../index.jsp");
+            } else {
+        %>
+        <%@include file="../Admin/adminNav.jsp" %>
+        <%
+            }
+        %>
+        <div class="d-flex justify-content-between ms-5 mt-5 me-5 mb-3">
             <a href="./viewAllBills.jsp" class="btn btn-secondary"><i class="fas fa-chevron-left"></i></a>
+            <a href="./cashierSystem.jsp" class="btn btn-primary">Cashier System</i></a>
         </div>
+
         <div class="container">
             <%
-                Connection con = DBConnector.getConnection();
                 int bill_id = Integer.parseInt(request.getParameter("id"));
                 String bill_date = (request.getParameter("date"));
                 float tot = 0;

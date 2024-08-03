@@ -27,7 +27,7 @@
                     try {
                         int billId = Bill.saveBill(productList, con);
                         if (billId > 0) {
-                            session.invalidate();
+                            session.removeAttribute("productList");
                             response.sendRedirect("./cashierSystem.jsp");
                         } else {
                             out.println("<p class='text-danger'>An error occurred while saving the bill. Please try again later.</p>");

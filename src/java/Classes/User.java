@@ -8,6 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class User {
+
+    private int id;
     private String firstName;
     private String lastName;
     private String password;
@@ -26,7 +28,10 @@ public class User {
     public String getRole() {
         return role;
     }
-    
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     // Parameterized constructor
     public User(String firstName, String lastName, String username, String password, String role) {
@@ -38,7 +43,7 @@ public class User {
     }
 
     public boolean register(Connection con) {
-         boolean a = false;
+        boolean a = false;
         try {
             String query = "INSERT INTO user(firstName, lastName, username, password, role) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement pstmt = con.prepareStatement(query);
@@ -47,15 +52,16 @@ public class User {
             pstmt.setString(3, this.username);
             pstmt.setString(4, this.password);
             pstmt.setString(5, this.role);
-             if (pstmt.executeUpdate() > 0) {
+            if (pstmt.executeUpdate() > 0) {
                 a = true;
-            }            
+            }
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
         return a;
     }
+
     public int login(Connection con) {
         int id = -1;
         String sql = "SELECT * FROM user WHERE username=?";
@@ -64,7 +70,7 @@ public class User {
             pstmt.setString(1, this.username);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                id = rs.getInt("id");
+                this.id = rs.getInt("id");
                 this.firstName = rs.getString("firstname");
                 this.lastName = rs.getString("lastname");
                 this.password = rs.getString("password");
@@ -73,6 +79,22 @@ public class User {
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return id;
+        return this.id;
+    }
+
+    public void getAUser(Connection con) {
+        String sql = "SELECT * FROM user WHERE id=?;";
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, this.id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                this.firstName = rs.getString("firstname");
+                this.lastName = rs.getString("lastname");
+                this.role = rs.getString("role");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

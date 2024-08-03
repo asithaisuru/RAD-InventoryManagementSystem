@@ -4,6 +4,7 @@
     Author     : Asitha
 --%>
 
+<%@page import="Classes.User"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="Classes.DBConnector"%>
 <%@page import="Classes.Product"%>
@@ -18,10 +19,23 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     </head>
     <body class="bg-dark text-center text-white">
+        <%
+            Connection con = DBConnector.getConnection();
+            int userId = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
+            User user = new User();
+            user.setId(userId);
+            user.getAUser(con);
+            if (!user.getRole().equals("Admin")) {
+                response.sendRedirect("../index.jsp");
+            } else {
+        %>
+        <%@include file="adminNav.jsp" %>
+        <%
+            }
+        %>
         <div class="container mt-5">
             <h1 class="h1">Edit Product</h1>
             <%
-                Connection con = DBConnector.getConnection();
                 String id = "-1";
                 if (request.getParameter("id") != null) {
                     id = request.getParameter("id");

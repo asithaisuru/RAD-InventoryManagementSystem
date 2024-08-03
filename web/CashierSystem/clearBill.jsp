@@ -5,6 +5,6 @@
 --%>
 
 <%
-    session.invalidate();
+    session.removeAttribute("productList");
     response.sendRedirect("./cashierSystem.jsp");
 %>

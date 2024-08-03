@@ -26,7 +26,7 @@
             ck.setMaxAge(30*24*60*60);
         }
         if (user.getRole().equals("Admin")) {
-            response.sendRedirect("AdminDashboard.jsp");
+            response.sendRedirect("Admin/adminDashboard.jsp");
         } else if (user.getRole().equals("Staff")) {
             response.sendRedirect("./CashierSystem/cashierSystem.jsp");
         }

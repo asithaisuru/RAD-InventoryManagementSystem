@@ -22,10 +22,10 @@ public class Bill {
 
     private int id;
     private double totalAmount;
-    private java.sql.Date billDate;
+    private String billDate;
 
     // Constructor
-    public Bill(int id, double totalAmount, java.sql.Date billDate) {
+    public Bill(int id, double totalAmount, String billDate) {
         this.id = id;
         this.totalAmount = totalAmount;
         this.billDate = billDate;
@@ -52,11 +52,11 @@ public class Bill {
         this.totalAmount = totalAmount;
     }
 
-    public java.sql.Date getBillDate() {
+    public String getBillDate() {
         return billDate;
     }
 
-    public void setBillDate(java.sql.Date billDate) {
+    public void setBillDate(String billDate) {
         this.billDate = billDate;
     }
 
@@ -138,7 +138,7 @@ public class Bill {
             while (rs.next()) {
                 int id = rs.getInt("bill_id");
                 double totalAmount = rs.getDouble("total_amount");
-                java.sql.Date billDate = rs.getDate("bill_date");
+                String billDate = rs.getString("bill_date");
 
                 Bill bill = new Bill(id, totalAmount, billDate);
                 bills.add(bill);

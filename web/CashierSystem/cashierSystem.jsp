@@ -4,6 +4,9 @@
     Author     : Asitha
 --%>
 
+<%@page import="Classes.User"%>
+<%@page import="Classes.DBConnector"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Classes.Product"%>
 <%@page import="java.util.List"%>
@@ -17,8 +20,20 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     </head>
-    <body class="text-center bg-dark text-white mt-5">
-        <div class="container">
+    <body class="text-center bg-dark text-white">
+        <%
+            Connection con = DBConnector.getConnection();
+            int userId = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
+            User user = new User();
+            user.setId(userId);
+            user.getAUser(con);
+            if (user.getRole().equals("Admin")) {
+        %>
+        <%@include file="../Admin/adminNav.jsp" %>
+        <%
+            }
+        %>
+        <div class="container mt-5">
             <h1 class="h1 mb-4">Cashier System</h1>
             <form action="CasherSystem-process.jsp" method="POST">
                 <div class="row mb-4">
@@ -33,7 +48,7 @@
             </form>
 
             <div class="row mb-3">
-                <div class="col-lg-3"></div>
+                <div class="col-lg-2"></div>
                 <div class="col-lg-2">
                     <form action="saveBill.jsp" method="POST">
                         <input type="submit" value="Print" class="btn btn-warning col-lg-12">
@@ -45,7 +60,10 @@
                 <div class="col-lg-2">
                     <a href="viewAllBills.jsp"><span class="btn btn-secondary col-lg-12">View All Bills</span></a>
                 </div>
-                <div class="col-lg-3"></div>
+                <div class="col-lg-2">
+                    <a href="viewAllProducts.jsp"><span class="btn btn-secondary col-lg-12">View All Products</span></a>
+                </div>
+                <div class="col-lg-2"></div>
             </div>
 
             <div class="text-center">

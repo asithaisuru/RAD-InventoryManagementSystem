@@ -17,8 +17,22 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     </head>
-    <body class="mt-5 text-white bg-dark">
-        <a href="./addProduct.jsp"><button class="btn btn-secondary ms-5"><i class="fas fa-chevron-left"></i></button></a>
+    <body class="text-white bg-dark">
+        <%
+            Connection con = DBConnector.getConnection();
+            int userId = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
+            User user = new User();
+            user.setId(userId);
+            user.getAUser(con);
+            if (!user.getRole().equals("Admin")) {
+                response.sendRedirect("../index.jsp");
+            } else {
+        %>
+        <%@include file="../Admin/adminNav.jsp" %>
+        <%
+            }
+        %>
+        <a href="./cashierSystem.jsp"><button class="btn btn-secondary ms-5"><i class="fas fa-chevron-left"></i></button></a>
         <div class="container text-center ">
             <h1>View All Products</h1>
             <table class="table table-dark table-hover">
@@ -32,7 +46,6 @@
                 </thead>
                 <tbody>
                     <%
-                        Connection con = DBConnector.getConnection();
                         Product prodcuts = new Product();
                         List<Product> allProducts = prodcuts.getAllProducts(con);
                         for (Product p : allProducts) {

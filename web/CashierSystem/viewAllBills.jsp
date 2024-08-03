@@ -4,6 +4,7 @@
     Author     : Asitha
 --%>
 
+<%@page import="Classes.User"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="Classes.DBConnector"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -19,8 +20,22 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     </head>
-    <body class="bg-dark text-white text-center mt-5">
-        <div class="d-flex justify-content-start ms-5">
+    <body class="bg-dark text-white text-center">
+        <%
+            Connection con = DBConnector.getConnection();
+            int userId = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
+            User user = new User();
+            user.setId(userId);
+            user.getAUser(con);
+            if (!user.getRole().equals("Admin")) {
+                response.sendRedirect("../index.jsp");
+            } else {
+        %>
+        <%@include file="../Admin/adminNav.jsp" %>
+        <%
+            }
+        %>
+        <div class="d-flex justify-content-start ms-5 mt-5">
             <a href="./cashierSystem.jsp" class="btn btn-secondary"><i class="fas fa-chevron-left"></i></a>
         </div>
         <div class="container">
@@ -38,7 +53,6 @@
                     <tbody>
                         <%
                             List<Bill> bills = null;
-                            Connection con = DBConnector.getConnection();
                             try {
                                 bills = Bill.getAllBills(con);
                             } catch (SQLException e) {
