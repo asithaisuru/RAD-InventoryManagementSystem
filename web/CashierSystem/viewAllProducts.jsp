@@ -30,10 +30,15 @@
         <%
             }
         %>
-        <a href="./cashierSystem.jsp"><button class="btn btn-secondary ms-5 mt-5"><i class="fas fa-chevron-left"></i></button></a>
+        <div class=" ms-5 mt-5">
+            <a href="./cashierSystem.jsp"><button class="btn btn-secondary"><i class="fas fa-chevron-left"></i></button></a>
+        </div>
         <div class="container text-center ">
             <h1>View All Products</h1>
-            <table class="table table-dark table-hover">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="productName" placeholder="Enter Product Name" aria-label="Product Name" aria-describedby="productFilter">
+            </div>
+            <table class="table table-dark table-hover" id="productTable">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -57,6 +62,26 @@
                     <% }%>
                 </tbody>
             </table>
+            <script>
+                const productInput = document.getElementById('productName');
+                const productTable = document.getElementById('productTable');
+
+                productInput.addEventListener('keyup', function () {
+                    const searchTerm = productInput.value.toLowerCase();
+                    const productRows = productTable.querySelectorAll('tbody tr');
+
+                    for (const row of productRows) {
+                        const productNameCell = row.querySelector('td:nth-child(2)');
+                        const productName = productNameCell.textContent.toLowerCase();
+
+                        if (productName.includes(searchTerm)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
+                });
+            </script>
         </div>
     </body>
 </html>
