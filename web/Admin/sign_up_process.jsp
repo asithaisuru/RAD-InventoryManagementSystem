@@ -13,7 +13,7 @@
 
     String fname = request.getParameter("firstname");
     String lname = request.getParameter("lastname");
-    String role = request.getParameter("role");
+    String role = "Staff";
     String uname = request.getParameter("UserName");
     String psw = request.getParameter("password");
 

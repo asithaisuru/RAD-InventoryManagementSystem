@@ -26,7 +26,7 @@
                         <a class="nav-link" href="../Admin/adminDashboard.jsp">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="./sign_up.jsp">User Management</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Admin/addProduct.jsp">Product Management</a>
