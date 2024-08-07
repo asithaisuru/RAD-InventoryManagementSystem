@@ -33,7 +33,28 @@
         <%
             }
         %>
+
         <div class="container mt-5">
+            <%
+                if (request.getParameter("reg") != null) {
+                    String reg = request.getParameter("reg");
+                    if (reg.equals("1")) {
+            %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> User Registration Successful.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <%
+            } else if (reg.equals("2")) {
+            %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> Unable to register User.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <%
+                    }
+                }
+            %>
             <h1 class="h1 mb-4">Register</h1>
             <form action="sign_up_process.jsp" method="POST">
                 <div class="row mb-4">
@@ -57,17 +78,7 @@
                     <input type="password" id="passwordInput" name="password" class="form-control" placeholder="Password" required/>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block mb-4">Sign Up</button>                
-            </form>
-            <%
-                if (request.getParameter("reg") != null) {
-                    String reg = request.getParameter("reg");
-                    if (reg.equals("1")) {
-                        out.println("User Registration Successful.");
-                    } else if (reg.equals("2")) {
-                        out.println("ERROR: Unable to register User.");
-                    }
-                }
-            %>
+            </form>            
         </div>
     </body>
 </html>
