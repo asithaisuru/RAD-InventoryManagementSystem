@@ -16,19 +16,18 @@
 
     User user = new User(psw, uname);
     int id = user.login(con);
-    out.print(id);
+//    out.print(id);
 
     if (id != -1) {
-        out.print(id);
+//        out.print(id);        
+//        out.print(user.getRole());        
         session.setAttribute("TaskTrackerID", id);
-        if (request.getParameter("remember") != null) {
-            Cookie ck = new Cookie("TaskTracker", String.valueOf(id));
-            ck.setMaxAge(30*24*60*60);
-        }
-        if (user.getRole().equals("Admin")) {
-            response.sendRedirect("Admin/adminDashboard.jsp");
+        if (user.getRole().equals("Admin")) {            
+            response.sendRedirect("./Admin/adminDashboard.jsp");
         } else if (user.getRole().equals("Staff")) {
             response.sendRedirect("./CashierSystem/cashierSystem.jsp");
         }
+    }else{
+        response.sendRedirect("./index.jsp?log=1");
     }
 %>

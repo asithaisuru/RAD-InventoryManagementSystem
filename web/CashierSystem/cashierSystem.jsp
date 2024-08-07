@@ -23,14 +23,16 @@
     <body class="text-center bg-dark text-white">
         <%
             Connection con = DBConnector.getConnection();
-            int userId = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
-            User user = new User();
-            user.setId(userId);
-            user.getAUser(con);
-            if (user.getRole().equals("Admin")) {
+            if (session.getAttribute("TaskTrackerID") != null) {
+                int id = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
+                User user = new User();
+                user.setId(id);
+                user.getAUser(con);
+                if (user.getRole().equals("Admin")) {
         %>
         <%@include file="../Admin/adminNav.jsp" %>
         <%
+                }
             }
         %>
         <div class="container mt-5">
@@ -48,7 +50,7 @@
             </form>
 
             <div class="row mb-3">
-                <div class="col-lg-2"></div>
+                <div class="col-lg-1"></div>
                 <div class="col-lg-2">
                     <form action="saveBill.jsp" method="POST">
                         <input type="submit" value="Print" class="btn btn-warning col-lg-12">
@@ -61,9 +63,12 @@
                     <a href="viewAllBills.jsp"><span class="btn btn-secondary col-lg-12">View All Bills</span></a>
                 </div>
                 <div class="col-lg-2">
-                    <a href="viewAllProducts.jsp"><span class="btn btn-secondary col-lg-12">View All Products</span></a>
+                    <a href="viewAllProducts.jsp"><span class="btn btn-info col-lg-12">View All Products</span></a>
                 </div>
-                <div class="col-lg-2"></div>
+                <div class="col-lg-2">
+                    <a href="../Common/logout.jsp"><span class="btn btn-primary col-lg-12">Logout</span></a>
+                </div>
+                <div class="col-lg-1"></div>
             </div>
 
             <div class="text-center">

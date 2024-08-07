@@ -70,16 +70,20 @@ public class User {
             pstmt.setString(1, this.username);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                this.id = rs.getInt("id");
-                this.firstName = rs.getString("firstname");
-                this.lastName = rs.getString("lastname");
-                this.password = rs.getString("password");
-                this.role = rs.getString("role");
+                String dbPsw = rs.getString("password");
+                if (MD5.getMd5(this.password).equals(dbPsw)) {
+                    this.id = rs.getInt("id");
+                    id = this.id;
+                    this.firstName = rs.getString("firstname");
+                    this.lastName = rs.getString("lastname");
+                    this.role = rs.getString("role");
+                    this.password = rs.getString("password");
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return this.id;
+        return id;
     }
 
     public void getAUser(Connection con) {

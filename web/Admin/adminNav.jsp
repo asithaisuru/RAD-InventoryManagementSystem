@@ -26,7 +26,7 @@
                         <a class="nav-link" href="../Admin/adminDashboard.jsp">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./sign_up.jsp">User Management</a>
+                        <a class="nav-link" href="../Admin/sign_up.jsp">User Management</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Admin/addProduct.jsp">Product Management</a>
@@ -34,14 +34,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../CashierSystem/cashierSystem.jsp">Cashier System</a>
                     </li>
-                    <!--                    <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Product Management
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                <a class="dropdown-item" href="../Admin/addProduct.jsp">Add Product</a>
-                                            </div>
-                                        </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Common/logout.jsp">Logout</a>
+                    </li>
                 </ul>
             </div>
         </nav>

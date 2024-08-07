@@ -17,19 +17,23 @@
     <body>
         <%
             Connection con = DBConnector.getConnection();
-            int id = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
-            User user = new User();
-            user.setId(id);
-            user.getAUser(con);
-            if (!user.getRole().equals("Admin")) {
-                response.sendRedirect("../index.jsp");
-            } else {
+            if (session.getAttribute("TaskTrackerID") != null) {
+                int id = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
+                User user = new User();
+                user.setId(id);
+                user.getAUser(con);
+                if (!user.getRole().equals("Admin")) {
+                    response.sendRedirect("../index.jsp");
+                } else {
         %>
         <%@include file="adminNav.jsp" %>
         <%
+                }
+            } else {
+                response.sendRedirect("../index.jsp");
             }
         %>
-        
-        
+
+
     </body>
 </html>

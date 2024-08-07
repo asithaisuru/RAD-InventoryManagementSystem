@@ -23,14 +23,20 @@
     <body class="text-center bg-dark text-white">
         <%
             Connection con = DBConnector.getConnection();
-            int userId = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
-            User user = new User();
-            user.setId(userId);
-            user.getAUser(con);
-            if (user.getRole().equals("Admin")) {
+            if (session.getAttribute("TaskTrackerID") != null) {
+                int id = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
+                User user = new User();
+                user.setId(id);
+                user.getAUser(con);
+                if (!user.getRole().equals("Admin")) {
+                    response.sendRedirect("../index.jsp");
+                } else {
         %>
-        <%@include file="../Admin/adminNav.jsp" %>
+        <%@include file="adminNav.jsp" %>
         <%
+                }
+            } else {
+                response.sendRedirect("../index.jsp");
             }
         %>
 

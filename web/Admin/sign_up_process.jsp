@@ -4,6 +4,7 @@
     Author     : malithi
 --%>
 
+<%@page import="Classes.MD5"%>
 <%@page import="Classes.DBConnector"%>
 <%@page import="Classes.User"%>
 <%@page import="java.sql.*"%>
@@ -15,7 +16,7 @@
     String lname = request.getParameter("lastname");
     String role = "Staff";
     String uname = request.getParameter("UserName");
-    String psw = request.getParameter("password");
+    String psw = MD5.getMd5(request.getParameter("password"));
 
     User user = new User(fname, lname, uname, psw, role);
     if (user.register(con)) {
