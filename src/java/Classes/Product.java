@@ -185,4 +185,30 @@ public class Product {
         return a;
     }
 
+    public List<Product> getSoldProductsByDateRange(Connection con, String fromDate, String toDate) throws SQLException {
+        List<Product> soldProducts = new ArrayList<>();
+        String sql = "SELECT p.id, p.name, p.quantity, SUM(bi.quantity) AS sold_quantity "
+                + "FROM product p "
+                + "INNER JOIN bill_items bi ON p.id = bi.product_id "
+                + "INNER JOIN bills b ON bi.bill_id = b.bill_id "
+                + "WHERE b.bill_date BETWEEN ? AND ? "
+                + "GROUP BY p.id, p.name, p.quantity "
+                + "ORDER BY sold_quantity DESC;";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, fromDate);
+        pstmt.setString(2, toDate);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int quantity = rs.getInt("quantity");
+            int soldQuantity = rs.getInt("sold_quantity");
+            Product product = new Product(name, quantity, 0.0); // Price not needed for report
+            product.setId(id);
+            product.setQuantity(soldQuantity);
+            soldProducts.add(product);
+        }
+        return soldProducts;
+    }
 }
