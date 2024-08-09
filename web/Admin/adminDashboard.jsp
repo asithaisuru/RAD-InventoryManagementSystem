@@ -69,39 +69,70 @@
             <hr>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="mb-3">Report</h3>
                     <%
-                        String fromDate = request.getParameter("from");
-                        String toDate = request.getParameter("to");
+                        if (request.getParameter("from") != null && request.getParameter("to") != null) {
+                            String fromDate = request.getParameter("from");
+                            String toDate = request.getParameter("to");
 
-                        // Get sold products
-                        List<Product> soldProducts = new Product().getSoldProductsByDateRange(con, fromDate, toDate);
+                            List<Product> soldProducts = new Product().getSoldProductsByDateRange(con, fromDate, toDate);
 
-                        // Close connection (optional, consider connection pool management)
-                        con.close();
                     %>
 
                     <% if (soldProducts.isEmpty()) { %>
+
+                    <h3 class="mb-5">Report</h3>
                     <p>No products were sold between the specified dates.</p>
                     <% } else { %>
-                    <table class="table table-dark table-hover">
-                        <thead>
-                            <tr>
-                                <th>Item Name</th>
-                                <th>Quantity Sold</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for (Product product : soldProducts) {%>
-                            <tr>
-                                <td><%= product.getName()%></td>
-                                <td><%= product.getQuantity()%></td>
-                            </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
-                    <% }%>
 
+                    <h1 class="mb-3">Report</h1>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h3 class="mb-3">Summary</h3>
+                            <%
+                                // Calculate minimum and maximum sold items
+                                int minQuantity = Integer.MAX_VALUE;
+                                String minItemName = "";
+                                int maxQuantity = Integer.MIN_VALUE;
+                                String maxItemName = "";
+                                for (Product product : soldProducts) {
+                                    int quantity = product.getQuantity();
+                                    if (quantity < minQuantity) {
+                                        minQuantity = quantity;
+                                        minItemName = product.getName();
+                                    }
+                                    if (quantity > maxQuantity) {
+                                        maxQuantity = quantity;
+                                        maxItemName = product.getName();
+                                    }
+                                }
+                            %>
+                            <p>Maximum Sold Item:    <%= maxItemName%> (<%= maxQuantity%>)</p>
+                            <p>Minimum Sold Item: <%= minItemName%> (<%= minQuantity%>)</p>
+                        </div>
+                        <div class="col-lg-6">
+                            <h3 class="mb-3">Sold Products</h3>
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Quantity Sold</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (Product product : soldProducts) {%>
+                                    <tr>
+                                        <td><%= product.getName()%></td>
+                                        <td><%= product.getQuantity()%></td>
+                                    </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                            <%
+                                    }
+                                }
+                            %>
+                        </div>
+                    </div>
                 </div>
             </div>
     </body>

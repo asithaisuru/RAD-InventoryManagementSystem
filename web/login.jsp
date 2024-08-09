@@ -22,12 +22,12 @@
 //        out.print(id);        
 //        out.print(user.getRole());        
         session.setAttribute("TaskTrackerID", id);
-        if (user.getRole().equals("Admin")) {            
+        if (user.getRole().equals("Admin")) {
             response.sendRedirect("./Admin/adminDashboard.jsp");
         } else if (user.getRole().equals("Staff")) {
             response.sendRedirect("./CashierSystem/cashierSystem.jsp");
         }
-    }else{
+    } else {
         response.sendRedirect("./index.jsp?log=1");
     }
 %>

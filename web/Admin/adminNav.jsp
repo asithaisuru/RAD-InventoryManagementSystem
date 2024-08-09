@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="../Admin/adminDashboard.jsp">Home</a>
+                        <a class="nav-link" href="../Admin/adminDashboard.jsp">Reports</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Admin/sign_up.jsp">User Management</a>
