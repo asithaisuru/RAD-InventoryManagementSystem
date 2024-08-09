@@ -94,7 +94,6 @@
 
                         </table>
                     </form>
-                    <!--                <a href="./viewAllProducts.jsp"><button class="btn btn-secondary">View All Products</button></a>-->
                 </div>
 
                 <div class="col-8">     

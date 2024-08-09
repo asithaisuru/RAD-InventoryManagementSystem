@@ -204,7 +204,7 @@ public class Product {
             String name = rs.getString("name");
             int quantity = rs.getInt("quantity");
             int soldQuantity = rs.getInt("sold_quantity");
-            Product product = new Product(name, quantity, 0.0); // Price not needed for report
+            Product product = new Product(name, quantity, 0.0);
             product.setId(id);
             product.setQuantity(soldQuantity);
             soldProducts.add(product);

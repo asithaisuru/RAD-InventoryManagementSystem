@@ -1,7 +1,7 @@
 <%-- 
     Document   : login
     Created on : Jul 27, 2024, 12:18:35 PM
-    Author     : malithi
+    Author     : Asitha
 --%>
 
 <%@page import="Classes.User"%>
@@ -16,11 +16,8 @@
 
     User user = new User(psw, uname);
     int id = user.login(con);
-//    out.print(id);
 
-    if (id != -1) {
-//        out.print(id);        
-//        out.print(user.getRole());        
+    if (id != -1) {     
         session.setAttribute("TaskTrackerID", id);
         if (user.getRole().equals("Admin")) {
             response.sendRedirect("./Admin/adminDashboard.jsp");

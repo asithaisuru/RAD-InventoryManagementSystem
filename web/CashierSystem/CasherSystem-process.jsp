@@ -9,7 +9,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.*"%>
-<%@page import="Classes.Product"%> <!-- Adjust the package name as needed -->
+<%@page import="Classes.Product"%>
 
 <!DOCTYPE html>
 <html lang="en">

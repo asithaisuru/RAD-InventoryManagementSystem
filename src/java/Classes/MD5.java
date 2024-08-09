@@ -41,22 +41,4 @@ public class MD5 {
         }
     }
 
-    public static boolean checkMd5(String plainText, String md5Hash) {
-        // Get the MD5 hash of the plain text
-        String hashedText = getMd5(plainText);
-        // Compare the hashed text with the provided MD5 hash
-        return hashedText.equals(md5Hash);
-    }
-
-    public static String generateRandomToken(int byteLength) {
-        SecureRandom random = new SecureRandom();
-        byte[] bytes = new byte[byteLength];
-        random.nextBytes(bytes);
-        StringBuilder sb = new StringBuilder(byteLength * 2);
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
-    }
-
 }

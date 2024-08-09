@@ -21,10 +21,8 @@
     } else {
         if (product.saveToDB(con)) {
             response.sendRedirect("./addProduct.jsp?add=1");
-//                out.println("Product Added to Inventory");
         } else {
             response.sendRedirect("./addProduct.jsp?add=0");
-//                out.println("ERROR");
         }
     }
 

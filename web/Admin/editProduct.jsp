@@ -38,7 +38,7 @@
             }
         %>
         <div class="container mt-5">
-            <h1 class="h1">Edit Product</h1>
+            <h1 class="h1 mb-5">Edit Product</h1>
             <%
                 String id = "-1";
                 if (request.getParameter("id") != null) {
