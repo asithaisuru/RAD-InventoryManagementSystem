@@ -21,8 +21,8 @@
     <body class="text-white bg-dark text-center">
         <%
             Connection con = DBConnector.getConnection();
-            if (session.getAttribute("TaskTrackerID") != null) {
-                int id = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
+            if (session.getAttribute("IMS") != null) {
+                int id = Integer.parseInt(String.valueOf(session.getAttribute("IMS")));
                 User user = new User();
                 user.setId(id);
                 user.getAUser(con);
@@ -89,7 +89,6 @@
                         <div class="col-lg-6">
                             <h3 class="mb-3">Summary</h3>
                             <%
-                                // Calculate minimum and maximum sold items
                                 int minQuantity = Integer.MAX_VALUE;
                                 String minItemName = "";
                                 int maxQuantity = Integer.MIN_VALUE;

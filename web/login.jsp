@@ -18,7 +18,7 @@
     int id = user.login(con);
 
     if (id != -1) {     
-        session.setAttribute("TaskTrackerID", id);
+        session.setAttribute("IMS", id);
         if (user.getRole().equals("Admin")) {
             response.sendRedirect("./Admin/adminDashboard.jsp");
         } else if (user.getRole().equals("Staff")) {

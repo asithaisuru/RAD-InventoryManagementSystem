@@ -23,7 +23,7 @@
     <body class="bg-dark text-white text-center">
         <%
             Connection con = DBConnector.getConnection();
-            int userId = Integer.parseInt(String.valueOf(session.getAttribute("TaskTrackerID")));
+            int userId = Integer.parseInt(String.valueOf(session.getAttribute("IMS")));
             User user = new User();
             user.setId(userId);
             user.getAUser(con);
