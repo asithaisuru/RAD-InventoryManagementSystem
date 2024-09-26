@@ -1,6 +1,6 @@
 This is an Inventory Management System.
 
-What the system can do,
+**What the system can do,**
   Add products to the inventory
   Remove produts from the inventory.
   Cashier System
