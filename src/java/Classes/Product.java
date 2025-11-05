@@ -142,4 +142,73 @@ public class Product {
         return id;
     }
 
+    public void updateQuantity(Connection con, int quantity) throws SQLException {
+        String sql = "UPDATE product SET quantity = quantity - ? WHERE id = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, quantity);
+        ps.setInt(2, this.id);
+        ps.executeUpdate();
+        ps.close();
+    }
+
+    public boolean editProduct(Connection con) {
+        boolean a = false;
+        String sql = "UPDATE product SET name = ?, price = ?, quantity = ? WHERE id = ?";
+        PreparedStatement pstmt;
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, this.name);
+            pstmt.setDouble(2, this.price);
+            pstmt.setInt(3, this.quantity);
+            pstmt.setInt(4, this.id);
+            if (pstmt.executeUpdate() > 0) {
+                a = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return a;
+    }
+
+    public boolean deleteProduct(Connection con) {
+        boolean a = false;
+        String sql = "DELETE FROM product WHERE id = ?";
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, this.id);
+            if (pstmt.executeUpdate() > 0) {
+                a = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return a;
+    }
+
+    public List<Product> getSoldProductsByDateRange(Connection con, String fromDate, String toDate) throws SQLException {
+        List<Product> soldProducts = new ArrayList<>();
+        String sql = "SELECT p.id, p.name, p.quantity, SUM(bi.quantity) AS sold_quantity "
+                + "FROM product p "
+                + "INNER JOIN bill_items bi ON p.id = bi.product_id "
+                + "INNER JOIN bills b ON bi.bill_id = b.bill_id "
+                + "WHERE b.bill_date BETWEEN ? AND ? "
+                + "GROUP BY p.id, p.name, p.quantity "
+                + "ORDER BY sold_quantity DESC;";
+
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, fromDate);
+        pstmt.setString(2, toDate);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int quantity = rs.getInt("quantity");
+            int soldQuantity = rs.getInt("sold_quantity");
+            Product product = new Product(name, quantity, 0.0);
+            product.setId(id);
+            product.setQuantity(soldQuantity);
+            soldProducts.add(product);
+        }
+        return soldProducts;
+    }
 }
